@@ -1,3 +1,10 @@
+require 'capybara'
+require 'capybara/rspec'
+require 'capybara/dsl'
+require './app.rb'
+
+Capybara.app = Thermostat
+
 #add simple cov setup to rspec setup file=>>
 require 'simplecov'
 require 'simplecov-console'

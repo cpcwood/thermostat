@@ -65,4 +65,22 @@ describe("Thermostat Model", function() {
     });
   });
 
+  describe("#currentEnergyUsage", function() {
+    it("Temperature less than 18 returns 'low-usage'", function() {
+      for (var i = 0; i < 3; i++) thermostatModel.decrease();
+      expect(thermostatModel.energyUsage()).toEqual("low-usage");
+    });
+    it("Temperature 18 to 24 returns 'medium-usage'", function() {
+      expect(thermostatModel.energyUsage()).toEqual("medium-usage");
+      for (var i = 0; i < 2; i++) thermostatModel.decrease();
+      expect(thermostatModel.energyUsage()).toEqual("medium-usage");
+      for (var i = 0; i < 6; i++) thermostatModel.increase();
+      expect(thermostatModel.energyUsage()).toEqual("medium-usage");
+    });
+    it("Temperature greater than 24 returns 'high-usage'", function() {
+      for (var i = 0; i < 5; i++) thermostatModel.increase();
+      expect(thermostatModel.energyUsage()).toEqual("high-usage");
+    });
+  });
+
 });

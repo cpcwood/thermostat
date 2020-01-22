@@ -12,7 +12,6 @@ describe("Thermostat Model", function() {
     it("Should create new ThermostatModel instance", function() {
       expect(thermostatModel instanceof ThermostatModel).toBe(true);
     });
-
     it("Temperature should initialize at 20", function() {
       expect(thermostatModel.temperature).toEqual(20);
     });

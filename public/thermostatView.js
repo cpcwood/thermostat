@@ -1,3 +1,5 @@
+"use strict"
+
 function ThermostatView(thermostatElement){
   this._thermostatElement = thermostatElement
 

@@ -14,7 +14,7 @@ describe("Thermostat Controller", function() {
   });
 
   describe("::new", function() {
-    it("should set thermostatView to initial temperature", function() {
+    it("Should set thermostatView to initial temperature", function() {
       expect(thermostatViewMock.display).toHaveBeenCalledWith(20);
     });
   });

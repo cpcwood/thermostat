@@ -1,3 +1,5 @@
+"use strict"
+
 // takes the thermostat value from homepage.erb and assigns to variable
 var thermostatDisplay = document.getElementById('thermostat');
 

@@ -35,12 +35,12 @@ describe("Thermostat Model", function() {
       expect(thermostatModel.powerSaving).toEqual(false);
     });
     it("Max temperature is 25 if powersaving mode on", function() {
-      for (var i = 0; i < 10; i++) thermostatModel.increase();
+      for (var i = 0; i < 6; i++) thermostatModel.increase();
       expect(thermostatModel.temperature).toEqual(25);
     });
     it("Max temperature is 32 if powersaving mode off", function() {
       thermostatModel.togglePowerSaving();
-      for (var i = 0; i < 15; i++) thermostatModel.increase();
+      for (var i = 0; i < 13; i++) thermostatModel.increase();
       expect(thermostatModel.temperature).toEqual(32);
     });
 
@@ -54,6 +54,14 @@ describe("Thermostat Model", function() {
     it("Has minimum temperature limit of 10", function() {
       for (var i = 0; i < 11; i++) thermostatModel.decrease();
       expect(thermostatModel.temperature).toEqual(10);
+    });
+  });
+
+  describe("#reset", function() {
+    it("Resets temperature back to default", function() {
+      thermostatModel.increase();
+      thermostatModel.reset();
+      expect(thermostatModel.temperature).toEqual(20);
     });
   });
 

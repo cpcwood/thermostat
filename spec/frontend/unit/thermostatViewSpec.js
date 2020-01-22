@@ -1,4 +1,9 @@
+"use strict"
+
 describe("Thermostat View", function() {
+
+  var thermostatDivMock,
+      thermostatView;
 
   beforeEach(function() {
     thermostatDivMock = {};

@@ -1,4 +1,8 @@
+"use strict"
+
 describe("Thermostat Model", function() {
+
+  var thermostatModel;
 
   beforeEach(function() {
     thermostatModel = new ThermostatModel();

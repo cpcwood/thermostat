@@ -4,7 +4,7 @@ function ThermostatModel(){
   var defaultTemp = 20;
   var min = 10;
   this.powerSaving = true;
-  this.temperature = defaultTemp;
+  this.temperature = 20;
 
   this.increase = function(){
     if (this.temperature < this._maxTemp()){ this.temperature++; }

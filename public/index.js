@@ -1,4 +1,3 @@
-"use strict"
 
 window.addEventListener("load", function() {
   var thermostatDisplay = document.getElementById('getCurrentTemp');
@@ -17,20 +16,24 @@ window.addEventListener("load", function() {
     $('#raiseTemp').click (function(){
       thermostatController.thermostatModel.increase();
       thermostatController.updateThermostatView();
+      updateJSON();
     });
 
     $('#dropTemp').click(function(){
       thermostatController.thermostatModel.decrease();
       thermostatController.updateThermostatView();
+      updateJSON();
     });
 
     $('#reset').click(function(){
-        thermostatController.thermostatModel.reset();
-        thermostatController.updateThermostatView();
+      thermostatController.thermostatModel.reset();
+      thermostatController.updateThermostatView();
+      updateJSON();
     });
 
     $('#ecoToggle').click(function(){
-      thermostatController.thermostatModel.togglePowerSaving()
+      thermostatController.thermostatModel.togglePowerSaving();
+      updateJSON();
     })
 
     $('#queryUsage').click(function(){
@@ -61,9 +64,49 @@ window.addEventListener("load", function() {
 
     })
 
+    // Update page values upon load
+
+    function loadJSON(callback) {
+      var xobj = new XMLHttpRequest();
+            xobj.overrideMimeType("application/json");
+        xobj.open('GET', 'my_data.json', true); // Replace 'my_data' with the path to your file
+        xobj.onreadystatechange = function () {
+              if (xobj.readyState == 4 && xobj.status == "200") {
+                // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+                callback(xobj.responseText);
+              }
+        };
+      xobj.send(null);
+    }
+
+    loadJSON(function(json) {
+      var data = JSON.parse(json)
+      thermostatController.thermostatModel.temperature = data['temperature']
+      thermostatController.thermostatModel.powerSaving = data['eco']
+      thermostatController.updateThermostatView();
+    });
+
+    var updateJSON = function(){
+      loadJSON(function(json) {
+        var data = JSON.parse(json)
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/temperature', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            temperature: thermostatController.thermostatModel.temperature,
+            eco: thermostatController.thermostatModel.powerSaving
+        }));
+      })
+    }
+
+
+
     //  Update on page load
 
-    thermostatController.updateThermostatView();
+    console.log(thermostatController.thermostatModel.temperature)
+
+    // updatePageOnLoad()
+
 
   })
 })

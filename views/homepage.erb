@@ -1,21 +1,33 @@
+<!DOCTYPE html>
+<head>
+
+  <meta carset=”utf-8>
+  <title>JS Thermostat</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
 
 <body>
-  Thermostat
+  <h2>Thermostat</h2>
+
+  The temperature is: <span id="thermostat">temperature</span>
+  <br>
+  Power Saving Mode: <span id="power-saving-status">power saving mode</span>
+  <br>
+  Usage: <span id="usage">usage details</span>
 
   <br>
 
-  The temperature is: <div id="thermostat">temperature</div>
-  Power Saving Mode: <div id="power-saving-status">power saving mode</div>
-  Usage: <div id="usage">usage details</div>
-
-  <button id="increase">Increase Temperature</button>
-  <button id="decrease">Decrease Temperature</button>
-  <button id="reset">Reset Temperature</button>
-  <button id="power-saving-toggle">Toggle Powersaving</button>
+  <button class="button" id="increase">Increase Temperature</button>
+  <button class="button" id="decrease">Decrease Temperature</button>
+  <button class="button" id="reset">Reset Temperature</button>
+  <button class="toggle" id="power-saving-toggle">Toggle Powersaving</button>
 
   <script src="thermostatModel.js"></script>
   <script src="thermostatView.js"></script>
   <script src="thermostatController.js"></script>
   <script src="index.js"></script>
+  <script src='jQuery.js'></script>
 
 </body>

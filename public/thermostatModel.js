@@ -32,4 +32,7 @@ function ThermostatModel(){
       return "high-usage";
     }
   }
+  this.powerSavingMode = function() {
+    return (this.powerSaving ? "On" : "Off")
+  }
 }

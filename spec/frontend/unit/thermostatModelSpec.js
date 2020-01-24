@@ -17,13 +17,11 @@ describe("Thermostat Model", function() {
     });
   });
 
-
   describe("#temperature", function() {
     it("Returns value of current temperature", function() {
       expect(thermostatModel.temperature).toEqual(20);
     });
   });
-
 
   describe("#increase", function() {
     it("Increases temperature property by 1", function() {
@@ -46,7 +44,6 @@ describe("Thermostat Model", function() {
       for (var i = 0; i < 13; i++) thermostatModel.increase();
       expect(thermostatModel.temperature).toEqual(32);
     });
-
   });
 
   describe("#decrease", function() {
@@ -83,6 +80,16 @@ describe("Thermostat Model", function() {
     it("Temperature greater than 24 returns 'high-usage'", function() {
       for (var i = 0; i < 5; i++) thermostatModel.increase();
       expect(thermostatModel.energyUsage()).toEqual("high-usage");
+    });
+  });
+
+  describe("#powerSavingMode", function() {
+    it("Returns 'on' if on", function() {
+      expect(thermostatModel.powerSavingMode()).toEqual('On')
+    });
+    it("Returns 'off' if off", function() {
+      thermostatModel.togglePowerSaving();
+      expect(thermostatModel.powerSavingMode()).toEqual('Off')
     });
   });
 

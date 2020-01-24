@@ -1,13 +1,13 @@
 "use strict"
 
 function ThermostatController(thermostatModel, thermostatView) {
-  this._thermostatModel = thermostatModel;
-  this._thermostatView = thermostatView;
+  this.thermostatModel = thermostatModel;
+  this.thermostatView = thermostatView;
 
-  this._updateThermostatView = function() {
-    this._thermostatView.display(this._thermostatModel.temperature);
+  this.updateThermostatView = function() {
+    this.thermostatView.display(this.thermostatModel.temperature);
   }
 
   // run update thermostat view upon construction of thermostatcontroller, i.e. opening of webpage
-  this._updateThermostatView();
+  this.updateThermostatView();
 }

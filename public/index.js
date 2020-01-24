@@ -1,7 +1,7 @@
 "use strict"
 
 window.addEventListener("load", function() {
-  var thermostatDisplay = document.getElementById('thermostat');
+  var thermostatDisplay = document.getElementById('getCurrentTemp');
 
   // Creates new controller when webpage is opened
   window.thermostatController = new ThermostatController(new ThermostatModel(), new ThermostatView(thermostatDisplay));
@@ -12,61 +12,58 @@ window.addEventListener("load", function() {
 
   $(document).ready(function(){
 
-    // Update fuctions
+    // Actions
 
-    // var updatePowerSavingMode = function(){
-    //   $('#power-saving-status').text(function(){
-    //     thermostatController.thermostatModel.powerSavingMode()
-    //   })
-    // }
-
-    // $('#power-saving-status').text(function(){
-    //   thermostatController.thermostatModel.powerSavingMode()
-    // })
-
-    // var updatePowerUsage = function(){
-    //   $('#usage').text(function(){
-    //     thermostatController.thermostatModel.energyUsage()
-    //   })
-    // }
-
-    // $('#usage').text(function(){
-    //   thermostatController.thermostatModel.energyUsage()
-    // })
-
-    console.log(thermostatController)
-
-
-
-    // jQuery events
-
-    $('#increase').click(function(){
-      thermostatController.thermostatModel.increase()
-      thermostatController.updateThermostatView()
+    $('#raiseTemp').click (function(){
+      thermostatController.thermostatModel.increase();
+      thermostatController.updateThermostatView();
     });
 
-    $('#decrease').click(function(){
-      thermostatController.thermostatModel.decrease()
-      thermostatController.updateThermostatView()
+    $('#dropTemp').click(function(){
+      thermostatController.thermostatModel.decrease();
+      thermostatController.updateThermostatView();
     });
 
     $('#reset').click(function(){
-      thermostatController.thermostatModel.reset()
-      thermostatController.updateThermostatView()
+        thermostatController.thermostatModel.reset();
+        thermostatController.updateThermostatView();
     });
 
-    $('#toggle').click(function(){
+    $('#ecoToggle').click(function(){
       thermostatController.thermostatModel.togglePowerSaving()
+    })
 
-    });
+    $('#queryUsage').click(function(){
+      $('#queryUsage').text(thermostatController.thermostatModel.energyUsage())
+    })
 
-    // Inital page setup
-    // updatePowerSavingMode()
-    // updateEnergyUsage()
+    $('#current-temperature').change(function() {
+      updateFont()
+    })
 
-  });
+    function updateFont() {
+      $("body").css("font-family", $('#current-temperature').val());
+    }
 
+    $.get('http://api.openweathermap.org/data/2.5/weather?q=London&appid=a3d9eb01d4de82b9b8d0849ef604dbed&units=metric',
+    function(data) {
+      $('#local-temp').text(data.main.temp);
+    })
 
+    $('#select-city').submit(function(event) {
+      event.preventDefault();
+      var city = $('#current-city').val();
 
+      $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=a3d9eb01d4de82b9b8d0849ef604dbed&units=metric',
+        function(data) {
+          $('#local-temp').text(data.main.temp);
+        })
 
-});
+    })
+
+    //  Update on page load
+
+    thermostatController.updateThermostatView();
+
+  })
+})

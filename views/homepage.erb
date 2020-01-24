@@ -3,31 +3,69 @@
 
   <meta carset=”utf-8>
   <title>JS Thermostat</title>
+
+  <link type="text/css" rel="stylesheet" href="css/style.css"></link>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 
 
 <body>
-  <h2>Thermostat</h2>
 
-  The temperature is: <span id="thermostat">temperature</span>
-  <br>
-  Power Saving Mode: <span id="power-saving-status">power saving mode</span>
-  <br>
-  Usage: <span id="usage">usage details</span>
+  <section>
 
-  <br>
+    <select id="current-temperature">
+      <option value="Arial">Arial</option>
+      <option value="Verdana">Verdana</option>
+      <option value="Impact">Impact</option>
+      <option value="Comic Sans MS">Sans </option>
+      <option value="Arial Narrow"> Narrow </option>
+      <option value="Franklin Gothic Medium"> Gothic </option>
+    </select>
 
-  <button class="button" id="increase">Increase Temperature</button>
-  <button class="button" id="decrease">Decrease Temperature</button>
-  <button class="button" id="reset">Reset Temperature</button>
-  <button class="toggle" id="power-saving-toggle">Toggle Powersaving</button>
 
-  <script src="thermostatModel.js"></script>
-  <script src="thermostatView.js"></script>
-  <script src="thermostatController.js"></script>
-  <script src="index.js"></script>
-  <script src='jQuery.js'></script>
+    <h1 >Outside temperature: <span id="local-temp"></span>
+      <form id="select-city">
+        <input id="current-city" type="text" placeholder="Enter a city"></input>
+        <input type="submit"></input>
+      </form>
+      <div id="temp-display">
+        Thermostat temp: <span id="getCurrentTemp"> </span>
+      </div>
+    </h1>
+
+    <p>
+      <button id="raiseTemp"> ⬆️ Raise Temp </button>
+      <!-- <button id="getCurrentTemp"> Current temp  </button>  -->
+      <button id="dropTemp"> ⬇️ Drop Temp </button>
+      <br>
+      <button id = "reset" > 🔄 Reset </button>
+      <br>
+      <!-- power saving mode is on <span id="pwrSave">  </span> -->
+      <br>
+      <!-- <button id="pwrSave" value="true"> 💚 ECO </button> -->
+      ECO Toggle
+      <label class="switch">
+        <input type="checkbox" id='ecoToggle' checked>
+        <span class="slider"></span>
+      </label>
+
+      <br>
+      <button id="queryUsage"> usage info </button>
+    </p>
+
+    <footer id="footer" class="footer py-2 px-3">
+    </footer>
+    <!-- seperation of concerns  -->
+
+    <script src="thermostatModel.js"></script>
+    <script src="thermostatView.js"></script>
+    <script src="thermostatController.js"></script>
+    <script src="index.js"></script>
+
+  </section>
 
 </body>

@@ -9,7 +9,8 @@ class Thermostat < Sinatra::Base
 
   post '/temperature' do
     push = JSON.parse(request.body.read)
-    File.open("public/my_data.json","w"){ |f| f << push.to_json }
+    puts 'push'
+    File.open("public/my_data.json","w+"){ |f| f << push.to_json }
   end
 
 
